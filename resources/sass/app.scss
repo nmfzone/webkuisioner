@@ -1,1 +1,10 @@
-//
+// Font awesome
+@import "~font-awesome/scss/font-awesome";
+
+@tailwind base;
+
+@import "variables";
+
+@tailwind components;
+
+@tailwind utilities;
