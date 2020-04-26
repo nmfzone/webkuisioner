@@ -3,7 +3,6 @@
     <description>Code Standard used for Laravel App</description>
 
     <file>./app</file>
-    <file>./database</file>
     <file>./routes</file>
 
     <arg name="colors"/>
