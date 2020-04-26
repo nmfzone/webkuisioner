@@ -1,0 +1,12 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+
+    level: 5
+
+    ignoreErrors:
+        - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+() should return [a-zA-Z|]+|null but return statement is missing#'
