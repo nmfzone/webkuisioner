@@ -10,3 +10,13 @@ parameters:
 
     ignoreErrors:
         - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+() should return [a-zA-Z|]+|null but return statement is missing#'
+
+    excludes_analyse:
+        - bootstrap/
+        - config/
+        - database/
+        - resources/
+        - routes/
+        - storage/
+        - tests/
+        - vendor/
