@@ -1,0 +1,70 @@
+#!/bin/sh
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$")
+
+if [[ "$STAGED_FILES" = "" ]]; then
+  exit 0
+fi
+
+PASS=true
+
+echo "\nFinding PHPCS installation:"
+
+# Check for phpcs installation
+which ./vendor/bin/phpcs &> /dev/null
+if [[ "$?" == 1 ]]; then
+    echo "\t\033[41m Please install PHPCS! \033[0m"
+    exit 1
+fi
+
+echo "\033[30;42m Found PHPCS installation \033[0m\n"
+
+echo "Finding larastan installation:"
+
+# Check for larastan installation
+which ./vendor/bin/phpstan &> /dev/null
+if [[ "$?" == 1 ]]; then
+    echo "\t\033[41m Please install Larastan! \033[0m"
+    exit 1
+fi
+
+echo "\033[30;42m Found larastan installation \033[0m\n"
+
+echo "PHPCS: Analysing code"
+
+for FILE in $STAGED_FILES
+do
+    ./vendor/bin/phpcs --standard="./.phpcs.xml" "$FILE"
+
+    if [[ "$?" != 0 ]]; then
+        PASS=false
+    fi
+done
+
+if $PASS; then
+    echo "\033[30;42m PHPCS: Pass \033[0m"
+    echo "\nLarastan: Analysing code\n"
+
+    for FILE in $STAGED_FILES
+    do
+        ./vendor/bin/phpstan analyse --no-progress $FILE
+
+        if [[ "$?" != 0 ]]; then
+            PASS=false
+        fi
+    done
+
+    if $PASS; then
+        echo "\033[30;42m Larastan: Pass \033[0m"
+    fi
+fi
+
+if ! $PASS; then
+  echo "\n\033[41m COMMIT FAILED \033[0m\n"
+  echo "Your commit contains files that should pass code standard but do not.\nPlease fix the errors and try again."
+  exit 1
+else
+  echo "\n\033[30;42m COMMIT SUCCEEDED \033[0m\n"
+fi
+
+exit $?
