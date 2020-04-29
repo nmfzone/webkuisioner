@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+require('./webpack.config')
 require('laravel-mix-purgecss')
 require('laravel-mix-tailwind')
 
@@ -16,3 +17,9 @@ require('laravel-mix-tailwind')
 mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .tailwind('./tailwind.config.js')
+
+mix.copy('node_modules/font-awesome/fonts', 'public/fonts/vendor/font-awesome')
+
+if (mix.inProduction()) {
+  mix.version()
+}

@@ -1,9 +1,11 @@
 // Font awesome
+$fa-font-path: '../fonts/vendor/font-awesome';
 @import "~font-awesome/scss/font-awesome";
 
 @tailwind base;
 
 @import "variables";
+@import "global";
 
 @tailwind components;
 
