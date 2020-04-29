@@ -17,6 +17,7 @@ require('laravel-mix-tailwind')
 mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .tailwind('./tailwind.config.js')
+  .purgeCss()
 
 mix.copy('node_modules/font-awesome/fonts', 'public/fonts/vendor/font-awesome')
 
