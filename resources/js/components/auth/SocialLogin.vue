@@ -109,12 +109,15 @@ export default {
           options += `, width=${width/systemZoom}, left=${(w - width) / 2 / systemZoom + dualScreenLeft}`
         }
 
+        document.domain = window.App.appDomain
         const popup = window.open(route(url), `Log in With ${provider}`, `toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, copyhistory=no${options}`)
 
         if (popup) popup.focus()
 
         const pooling = setInterval(() => {
           if (!popup || popup.closed || popup.closed === undefined) {
+            clearInterval(pooling)
+
             if (popup && popup.SOCIAL_LOGIN_STATUS) {
               const prevHref = window.location.href
               window.location.href = popup.SOCIAL_LOGIN_REDIRECT_PATH
@@ -126,7 +129,6 @@ export default {
               this.isError = true
               this.processing = null
             }
-            clearInterval(pooling)
           }
         }, 250)
       } else {

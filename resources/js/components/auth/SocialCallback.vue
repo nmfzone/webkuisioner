@@ -15,6 +15,7 @@
       }
     },
     async mounted() {
+      document.domain = window.App.appDomain
       window.SOCIAL_LOGIN_STATUS = true
       window.SOCIAL_LOGIN_REDIRECT_PATH = this.redirectPath
 

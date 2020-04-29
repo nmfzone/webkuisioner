@@ -15,6 +15,13 @@
     @yield('content')
   </div>
 
+  <script type='text/javascript'>
+    window.App = {!! json_encode([
+      'csrfToken' => csrf_token(),
+      'appDomain' => env('APP_DOMAIN')
+    ]) !!}
+  </script>
+
   <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
