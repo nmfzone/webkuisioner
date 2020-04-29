@@ -34,7 +34,7 @@ class SocialiteController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback(Request $request, $domain, $provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
         if (! in_array($provider, $this->socialProviders)) {
             abort(404);
