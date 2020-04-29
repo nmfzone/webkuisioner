@@ -115,12 +115,18 @@ export default {
         if (popup) popup.focus()
 
         const pooling = setInterval(() => {
-          if (!popup || popup.closed || popup.closed === undefined) {
+          if (!popup || popup.closed || popup.closed === undefined || popup.FINISH) {
             clearInterval(pooling)
 
             if (popup && popup.SOCIAL_LOGIN_STATUS) {
               const prevHref = window.location.href
-              window.location.href = popup.SOCIAL_LOGIN_REDIRECT_PATH
+              const redirectPath = popup.SOCIAL_LOGIN_REDIRECT_PATH
+
+              if (popup.closed === false) {
+                popup.close()
+              }
+
+              window.location.href = redirectPath
 
               if (prevHref === window.location.href) {
                 window.location.reload()

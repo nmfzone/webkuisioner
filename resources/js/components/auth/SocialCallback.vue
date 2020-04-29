@@ -21,7 +21,7 @@
 
       this.delay(5000).then(() => {
         if (window.opener && window.opener !== window) {
-          window.close()
+          window.FINISH = true
         } else {
           window.location.href = this.redirectPath
         }
