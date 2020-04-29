@@ -118,7 +118,12 @@ export default {
             clearInterval(pooling)
 
             if (popup && popup.SOCIAL_LOGIN_STATUS) {
+              const prevHref = window.location.href
               window.location.href = popup.SOCIAL_LOGIN_REDIRECT_PATH
+
+              if (prevHref === window.location.href) {
+                window.location.reload()
+              }
             } else {
               this.isError = true
               this.processing = null
