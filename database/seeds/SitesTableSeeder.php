@@ -24,7 +24,7 @@ class SitesTableSeeder extends Seeder
                 'role' => Role::OWNER,
             ]);
 
-            $user->site()->save(new Site([
+            $user->site()->save(factory(Site::class)->make([
                 'domain' => $subDomain,
             ]));
         }
