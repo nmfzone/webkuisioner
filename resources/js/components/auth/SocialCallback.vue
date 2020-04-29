@@ -14,18 +14,18 @@
         default: '/'
       }
     },
-    async mounted() {
+    mounted() {
       document.domain = window.App.appDomain
       window.SOCIAL_LOGIN_STATUS = true
       window.SOCIAL_LOGIN_REDIRECT_PATH = this.redirectPath
 
-      await this.delay(5000)
-
-      if (window.opener && window.opener !== window) {
-        window.close()
-      } else {
-        window.location.href = this.redirectPath
-      }
+      this.delay(5000).then(() => {
+        if (window.opener && window.opener !== window) {
+          window.close()
+        } else {
+          window.location.href = this.redirectPath
+        }
+      })
     },
     methods: {
       delay(t, v) {
