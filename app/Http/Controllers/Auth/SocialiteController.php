@@ -47,7 +47,7 @@ class SocialiteController extends Controller
         $originDomain = $request->session()->pull('origin');
 
         if (! $userEntity) {
-            DB::transaction(function () use ($request, $user, &$userEntity, $originDomain) {
+            DB::transaction(function () use ($user, &$userEntity, $originDomain) {
                 /** @var \App\Models\User $userEntity */
                 $userEntity = User::forceCreate([
                     'name' => $user->getName(),
