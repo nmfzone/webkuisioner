@@ -115,27 +115,29 @@ export default {
         if (popup) popup.focus()
 
         const pooling = setInterval(() => {
-          if (!popup || popup.closed || popup.closed === undefined || popup.FINISH) {
-            clearInterval(pooling)
+          try {
+            if (!popup || popup.closed || popup.closed === undefined || popup.FINISH) {
+              clearInterval(pooling)
 
-            if (popup && popup.SOCIAL_LOGIN_STATUS) {
-              const prevHref = window.location.href
-              const redirectPath = popup.SOCIAL_LOGIN_REDIRECT_PATH
+              if (popup && popup.SOCIAL_LOGIN_STATUS) {
+                const prevHref = window.location.href
+                const redirectPath = popup.SOCIAL_LOGIN_REDIRECT_PATH
 
-              if (popup.closed === false) {
-                popup.close()
+                if (popup.closed === false) {
+                  popup.close()
+                }
+
+                window.location.href = redirectPath
+
+                if (prevHref === window.location.href) {
+                  window.location.reload()
+                }
+              } else {
+                this.isError = true
+                this.processing = null
               }
-
-              window.location.href = redirectPath
-
-              if (prevHref === window.location.href) {
-                window.location.reload()
-              }
-            } else {
-              this.isError = true
-              this.processing = null
             }
-          }
+          } catch (e) {}
         }, 250)
       } else {
         window.location.href = route(url)
