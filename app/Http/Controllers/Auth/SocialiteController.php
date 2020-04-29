@@ -40,10 +40,12 @@ class SocialiteController extends Controller
 
         $user = Socialite::driver($provider)->user();
 
+        /** @var \App\Models\User|null $userEntity */
         $userEntity = User::where('email', User::getPlainEmail($user->email))->first();
 
         if (! $userEntity) {
             DB::transaction(function () use ($request, $user, &$userEntity) {
+                /** @var \App\Models\User $userEntity */
                 $userEntity = User::forceCreate([
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
@@ -59,7 +61,7 @@ class SocialiteController extends Controller
             });
         }
 
-        auth()->loginUsingId($userEntity->id);
+        auth()->login($userEntity);
 
         return view('socialite.callback');
     }

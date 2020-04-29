@@ -21,7 +21,7 @@ class CheckAndSyncParticipant
         $rootDomain = $request->getHttpHost();
 
         if (count(explode('.', $rootDomain)) == 3) {
-            /** @var \App\Models\Site $site */
+            /** @var \App\Models\Site|null $site */
             $site = Site::where('domain', $rootDomain)->first();
 
             if (! $site) {
