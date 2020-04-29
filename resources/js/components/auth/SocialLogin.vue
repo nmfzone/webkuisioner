@@ -115,15 +115,9 @@ export default {
 
         const pooling = setInterval(() => {
           if (!popup || popup.closed || popup.closed === undefined) {
-            clearInterval(pooling)
-
-            console.log(popup)
-
             if (popup && popup.SOCIAL_LOGIN_STATUS) {
               const prevHref = window.location.href
               window.location.href = popup.SOCIAL_LOGIN_REDIRECT_PATH
-
-              console.log(prevHref, window.location.href)
 
               if (prevHref === window.location.href) {
                 window.location.reload()
@@ -132,6 +126,7 @@ export default {
               this.isError = true
               this.processing = null
             }
+            clearInterval(pooling)
           }
         }, 250)
       } else {
