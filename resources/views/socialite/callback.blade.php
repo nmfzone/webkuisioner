@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-  <social-callback></social-callback>
+  <social-callback redirect-path="{{ $redirectPath }}"></social-callback>
 @endsection

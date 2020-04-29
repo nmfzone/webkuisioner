@@ -23,11 +23,13 @@ class SocialiteController extends Controller
         'twitter',
     ];
 
-    public function redirectToProvider($domain, $provider)
+    public function redirectToProvider(Request $request, $domain, $provider)
     {
         if (! in_array($provider, $this->socialProviders)) {
             abort(404);
         }
+
+        $request->session()->put('origin', $request->getHttpHost());
 
         return Socialite::driver($provider)->redirect();
     }
@@ -42,9 +44,10 @@ class SocialiteController extends Controller
 
         /** @var \App\Models\User|null $userEntity */
         $userEntity = User::where('email', User::getPlainEmail($user->email))->first();
+        $originDomain = $request->session()->pull('origin');
 
         if (! $userEntity) {
-            DB::transaction(function () use ($request, $user, &$userEntity) {
+            DB::transaction(function () use ($request, $user, &$userEntity, $originDomain) {
                 /** @var \App\Models\User $userEntity */
                 $userEntity = User::forceCreate([
                     'name' => $user->getName(),
@@ -54,15 +57,15 @@ class SocialiteController extends Controller
                     'role' => Role::PARTICIPANT,
                 ]);
 
-                $rootDomain = $request->getHttpHost();
-                $site = Site::where('domain', $rootDomain)->firstOrFail();
-
+                $site = Site::where('domain', $originDomain)->firstOrFail();
                 $userEntity->participations()->save($site);
             });
         }
 
         auth()->login($userEntity);
 
-        return view('socialite.callback');
+        $redirectPath = $request->getScheme() . '://' . $originDomain;
+
+        return view('socialite.callback', compact('redirectPath'));
     }
 }

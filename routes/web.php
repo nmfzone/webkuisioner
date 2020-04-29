@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::domain(env('APP_DOMAIN'))->group(function () {
+    Route::get('/auth/social/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
+});
+
 Route::domain('{account}.' . env('APP_DOMAIN'))->group(function () {
     Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider');
-    Route::get('/auth/social/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
 });

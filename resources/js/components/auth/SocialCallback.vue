@@ -16,6 +16,7 @@
     },
     async mounted() {
       window.SOCIAL_LOGIN_STATUS = true
+      window.SOCIAL_LOGIN_REDIRECT_PATH = this.redirectPath
 
       await this.delay(5000)
 

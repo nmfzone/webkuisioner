@@ -118,7 +118,7 @@ export default {
             clearInterval(pooling)
 
             if (popup && popup.SOCIAL_LOGIN_STATUS) {
-              window.location.reload()
+              window.location.href = popup.SOCIAL_LOGIN_REDIRECT_PATH
             } else {
               this.isError = true
               this.processing = null
