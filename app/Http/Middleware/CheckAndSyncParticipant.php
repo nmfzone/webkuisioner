@@ -31,9 +31,7 @@ class CheckAndSyncParticipant
             if (Auth::check() &&
                 Auth::user()->role === Role::PARTICIPANT &&
                 ! $site->participants()->find(Auth::user()->id)) {
-                Auth::user()->participations()->save(new Site([
-                    'domain' => $rootDomain,
-                ]));
+                Auth::user()->participations()->save($site);
             }
         }
 
