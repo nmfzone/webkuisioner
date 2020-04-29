@@ -131,7 +131,6 @@ export default {
     },
     syncGridStyle () {
       const elWidth = _.get(this.$refs.grid, 'parentNode.clientWidth', 388)
-      console.log(elWidth)
 
       this.gridStyle.flex = elWidth >= 388 ? '0 0 33.3%' : '0 0 100%'
       this.gridStyle.paddingLeft = this.gridStyle.paddingRight = elWidth >= 388 ? '5px' : '0px'
