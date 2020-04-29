@@ -16,6 +16,9 @@ class CreateSitesTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('domain');
+            $table->string('title');
+            $table->mediumText('welcome_message')->nullable();
+            $table->mediumText('privacy_policy')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

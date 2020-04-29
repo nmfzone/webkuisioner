@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'profile_url',
+        'name', 'email', 'password', 'profile_url', 'phone',
     ];
 
     protected $hidden = [
@@ -31,6 +31,18 @@ class User extends Authenticatable
     public function participations()
     {
         return $this->belongsToMany(Site::class, 'site_participant', 'participant_id', 'site_id');
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords(mb_strtolower($value));
+    }
+
+    public function setPhoneAttribute($value)
+    {
+        $value = preg_replace('/[^0-9]/', '', $value);
+
+        $this->attributes['phone'] = $value;
     }
 
     public function setEmailAttribute($value)

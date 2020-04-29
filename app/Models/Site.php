@@ -8,7 +8,9 @@ class Site extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['domain'];
+    protected $fillable = [
+        'title', 'domain', 'welcome_message', 'privacy_policy',
+    ];
 
     public function user()
     {
