@@ -47,7 +47,7 @@ class PreliminaryDataSeeder extends Seeder
 
             $user->site()->save(new Site([
                 'title' => $item['site']['title'],
-                'domain' => $item['site']['sub_domain'] . '.' . env('APP_DOMAIN'),
+                'domain' => $item['site']['sub_domain'] . '.' . app_main_domain(),
             ]));
         }
     }
