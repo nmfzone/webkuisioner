@@ -23,7 +23,7 @@ class SocialiteController extends Controller
         'twitter',
     ];
 
-    public function redirectToProvider(Request $request, $domain, $provider)
+    public function redirectToProvider(Request $request, $account, $provider)
     {
         if (! in_array($provider, $this->socialProviders)) {
             abort(404);
