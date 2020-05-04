@@ -2,10 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\Role;
 use App\Models\Site;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class CheckAndSyncParticipant
 {
@@ -20,19 +18,13 @@ class CheckAndSyncParticipant
     {
         $rootDomain = $request->getHttpHost();
 
-        if (count(explode('.', $rootDomain)) == env('SUB_DOMAIN_LEVEL', 3)) {
-            /** @var \App\Models\Site|null $site */
-            $site = Site::where('domain', $rootDomain)->first();
+        /** @var \App\Models\Site|null $site */
+        $site = Site::where('domain', $rootDomain)->first();
 
-            if (! $site) {
-                abort(404);
-            }
+        $request->session()->put('site', $site);
 
-            if (Auth::check() &&
-                Auth::user()->role === Role::PARTICIPANT &&
-                ! $site->participants()->find(Auth::user()->id)) {
-                Auth::user()->participations()->save($site);
-            }
+        if ($rootDomain !== app_main_domain() && ! $site) {
+            abort(404);
         }
 
         return $next($request);
