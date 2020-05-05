@@ -77,3 +77,22 @@ if (! function_exists('is_site')) {
         return $site->domain == request()->getHttpHost();
     }
 }
+
+if (! function_exists('asset_url')) {
+    /**
+     * Generate an asset url.
+     *
+     * @param string $path
+     * @return string
+     *
+     * @throws Exception
+     */
+    function asset_url($path)
+    {
+        if (env('MIX_ENABLED', app()->environment('local'))) {
+            return mix($path);
+        }
+
+        return asset($path);
+    }
+}

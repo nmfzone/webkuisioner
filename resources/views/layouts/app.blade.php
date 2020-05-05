@@ -8,7 +8,7 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset_url('css/app.css') }}" rel="stylesheet">
 
   @stack('stylesheets')
 </head>
@@ -24,7 +24,7 @@
     ]) !!}
   </script>
 
-  <script src="{{ mix('js/app.js') }}"></script>
+  <script src="{{ asset_url('js/app.js') }}"></script>
 
   @stack('javascripts')
 </body>
