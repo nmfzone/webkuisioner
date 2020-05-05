@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Site;
 use Closure;
 
-class CheckAndSyncParticipant
+class CheckTenantDomain
 {
     /**
      * Handle an incoming request.

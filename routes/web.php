@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'WebController@index')->name('index');
+Route::get('/', 'WebController@index')
+    ->name('index')
+    ->middleware('forbid_participant');
 
 Auth::routes();
 
@@ -24,7 +26,16 @@ Route::domain(app_main_domain())->group(function () {
 });
 
 Route::domain('{account}.' . app_main_domain())->group(function () {
-    Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider');
+    Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider')
+        ->middleware('guest');
 
-    Route::get('/privacy-policy', 'WebController@privacyPolicy')->name('privacy_policy');
+    Route::get('/privacy-policy', 'WebController@privacyPolicy')
+        ->name('privacy_policy');
+
+    Route::post(
+        '/register/participant',
+        'Auth\ParticipantRegistrationController@existingUser'
+    )
+        ->name('register.participant')
+        ->middleware('auth', 'forbid_participant');
 });

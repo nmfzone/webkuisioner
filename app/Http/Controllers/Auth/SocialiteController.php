@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -62,7 +63,7 @@ class SocialiteController extends Controller
             });
         }
 
-        auth()->login($userEntity);
+        Auth::login($userEntity);
 
         $redirectPath = $request->getScheme() . '://' . $originDomain;
 
