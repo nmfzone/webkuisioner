@@ -155,7 +155,6 @@ export default {
 
 <style lang="scss" scoped>
   .social-login {
-    margin-top: 30px;
 
     .error-message {
       color: #ff0000;
@@ -171,6 +170,7 @@ export default {
 
     .row {
       display: flex;
+      flex-wrap: wrap;
     }
 
     .btn-social-login {

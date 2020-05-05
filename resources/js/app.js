@@ -1,4 +1,5 @@
 import './bootstrap'
+import './container-screen'
 import Vue from 'vue'
 
 window.Vue = Vue

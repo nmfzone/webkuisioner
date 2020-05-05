@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebController@index')->name('index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::domain(env('APP_DOMAIN'))->group(function () {
+Route::domain(app_main_domain())->group(function () {
     Route::get('/auth/social/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
 });
 
-Route::domain('{account}.' . env('APP_DOMAIN'))->group(function () {
+Route::domain('{account}.' . app_main_domain())->group(function () {
     Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider');
+
+    Route::get('/privacy-policy', 'WebController@privacyPolicy')->name('privacy_policy');
 });

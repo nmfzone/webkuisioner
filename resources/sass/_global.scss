@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    vertical-align: middle;
 
     &:after {
         // IE fix for min-height
@@ -12,4 +11,24 @@
         min-height: inherit;
         font-size: 0;
     }
+}
+
+.hyphens-auto {
+    hyphens: auto;
+}
+
+.fine-justify {
+    @apply text-justify;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.btw {
+    word-break: break-word;
+    hyphens: auto;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
 }
