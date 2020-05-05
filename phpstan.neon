@@ -22,4 +22,4 @@ parameters:
         - storage/
         - tests/
         - vendor/
-        - ./*.php
+        - ?.php
