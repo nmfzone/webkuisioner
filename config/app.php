@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Garages\Database\EloquentServiceProvider::class,
 
         /*
          * Application Service Providers...
