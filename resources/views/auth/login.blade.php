@@ -27,7 +27,13 @@
             <label for="password" class="form-label">{{ __('Password') }}</label>
 
             <div class="form-stack">
-              <form-input id="password" type="password" name="password" autocomplete="current-password" with-add-on required></form-input>
+              <form-input id="password" type="password" @error('password') :state="false" @enderror name="password" autocomplete="current-password" with-add-on required></form-input>
+
+              @error('password')
+                <span class="invalid-feedback" role="alert">
+                  <b>{{ $message }}</b>
+                </span>
+              @enderror
             </div>
           </div>
 
