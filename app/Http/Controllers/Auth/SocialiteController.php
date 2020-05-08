@@ -44,7 +44,7 @@ class SocialiteController extends Controller
         $user = Socialite::driver($provider)->user();
 
         /** @var \App\Models\User|null $userEntity */
-        $userEntity = User::where('email', User::getPlainEmail($user->email))->first();
+        $userEntity = User::where('email', $user->email)->first();
         $originDomain = $request->session()->pull('origin');
 
         if (! $userEntity) {

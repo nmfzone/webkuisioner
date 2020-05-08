@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
+use App\Garages\Database\Builder;
+use App\Garages\Database\Concerns\SerializeEmail;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use SerializeEmail;
+
     /**
      * Register any application services.
      *
@@ -43,5 +47,13 @@ class AppServiceProvider extends ServiceProvider
             '*',
             \App\Http\View\Composers\SiteComposer::class
         );
+
+        Builder::interceptor('where', 'email', function ($type, $operator, $value) {
+            if (is_string($value)) {
+                return static::serializeEmail($value);
+            }
+
+            return $value;
+        });
     }
 }
