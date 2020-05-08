@@ -1,31 +1,11 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  @stack('meta')
+@extends('layouts.base')
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+@push('stylesheets')
+  <link href='https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;600' rel='stylesheet' type='text/css'>
+@endpush
 
-  <link href="{{ asset_url('css/app.css') }}" rel="stylesheet">
-
-  @stack('stylesheets')
-</head>
-<body>
-  <div id="app">
-    @yield('content')
+@section('content')
+  <div class="w-full font-exo font-light">
+    @yield('content-lv2')
   </div>
-
-  <script type='text/javascript'>
-    window.App = {!! json_encode([
-      'csrfToken' => csrf_token(),
-      'appDomain' => app_main_domain(),
-    ]) !!}
-  </script>
-
-  <script src="{{ asset_url('js/app.js') }}"></script>
-
-  @stack('javascripts')
-</body>
-</html>
+@endsection

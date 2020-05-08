@@ -1,6 +1,6 @@
 @extends('layouts.web')
 
-@section('content-v2')
+@section('content-lv2')
   <div class="font-light">
     <div class="w-full mb-6">
       <h3 class="text-2xl md:text-3xl mb-5 text-center">
