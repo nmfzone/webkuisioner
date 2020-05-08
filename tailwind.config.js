@@ -2,7 +2,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        front: ['"Exo 2"', 'Verdana', 'serif']
+        exo: ['"Exo 2"', 'Verdana', 'serif']
       },
       colors: {
         't-white': {
@@ -11,6 +11,9 @@ module.exports = {
           80: 'rgba(255, 255, 255, 0.8)',
           90: 'rgba(255, 255, 255, 0.9)',
         }
+      },
+      boxShadow: {
+        invalid: '0 0 0 0.2rem rgba(220,53,69,.25)'
       }
     }
   }

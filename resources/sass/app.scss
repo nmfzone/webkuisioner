@@ -9,4 +9,7 @@ $fa-font-path: '../fonts/vendor/font-awesome';
 
 @tailwind components;
 
+@import "components/form";
+@import "components/button";
+
 @tailwind utilities;

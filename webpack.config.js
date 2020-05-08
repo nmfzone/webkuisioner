@@ -15,6 +15,7 @@ const webpackConfig = {
     symlinks: false,
     alias: {
       '@root': `${root}/resources/js`,
+      '@mixins': `${root}/resources/js/mixins`,
       '@images': `${root}/resources/images`,
     }
   }
