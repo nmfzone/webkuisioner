@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Auth as AuthEnum;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,10 @@ Route::get('/', 'WebController@index')
     ->name('index')
     ->middleware('forbid_participant');
 
-Auth::routes();
+Auth::routes([
+    'register' => AuthEnum::REGISTRATION,
+    'verify' => AuthEnum::EMAIL_VERIFY,
+]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
