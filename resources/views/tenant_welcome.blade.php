@@ -1,7 +1,7 @@
 @extends('layouts.web')
 
 @section('content-lv2')
-  <div class="font-light">
+  <div class="font-light text-base">
     <div class="w-full mb-6">
       <h3 class="text-2xl md:text-3xl mb-5 text-center">
         Selamat Datang di {{ $site->title }}
