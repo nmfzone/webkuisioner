@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Auth::extend('session', function($app, $name, array $config) {
+        Auth::extend('session', function ($app, $name, array $config) {
             $provider = Auth::createUserProvider($config['provider'] ?? null);
 
             $guard = new SessionGuard($name, $provider, $this->app['session.store']);
