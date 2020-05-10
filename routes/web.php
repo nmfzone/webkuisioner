@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WebController@index')
-    ->name('index')
-    ->middleware('forbid_participant');
+    ->name('index');
 
 Auth::routes([
     'register' => AuthEnum::REGISTRATION,
@@ -30,8 +29,7 @@ Route::domain(app_main_domain())->group(function () {
 });
 
 Route::domain('{account}.' . app_main_domain())->group(function () {
-    Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider')
-        ->middleware('guest');
+    Route::get('/auth/social/{provider}', 'Auth\SocialiteController@redirectToProvider');
 
     Route::get('/privacy-policy', 'WebController@privacyPolicy')
         ->name('privacy_policy');
@@ -39,7 +37,5 @@ Route::domain('{account}.' . app_main_domain())->group(function () {
     Route::post(
         '/register/participant',
         'Auth\ParticipantRegistrationController@existingUser'
-    )
-        ->name('register.participant')
-        ->middleware('auth', 'forbid_participant');
+    )->name('register.participant');
 });

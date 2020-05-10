@@ -6,6 +6,17 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['forbid_participant'])
+            ->only('index');
+    }
+
     public function index()
     {
         if (is_tenant()) {

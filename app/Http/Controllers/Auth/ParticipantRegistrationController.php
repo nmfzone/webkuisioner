@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class ParticipantRegistrationController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'forbid_participant'])
+            ->only('existingUser');
+    }
+
     public function existingUser(Request $request, $account)
     {
         if ($request->user()->role === Role::PARTICIPANT) {

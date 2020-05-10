@@ -24,6 +24,17 @@ class SocialiteController extends Controller
         'twitter',
     ];
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['guest'])
+            ->only('redirectToProvider');
+    }
+
     public function redirectToProvider(Request $request, $account, $provider)
     {
         if (! in_array($provider, $this->socialProviders)) {
