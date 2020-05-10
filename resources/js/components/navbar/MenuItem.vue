@@ -55,6 +55,7 @@
       @apply absolute block bg-white overflow-hidden left-auto right-0 w-auto;
 
       top: 100%;
+      margin-right: 0.6px;
       margin-top: 1px;
       min-width: 200px;
       max-width: 300px;
