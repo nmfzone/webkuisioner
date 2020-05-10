@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class TenantAuthenticate
 {
@@ -13,16 +12,20 @@ class TenantAuthenticate
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     *
+     * @throws \Exception
      */
     public function handle($request, Closure $next)
     {
-        /** @var \App\Models\Site|null $site */
-        $site = $request->session()->get('site');
+        return app(Authenticate::class)->handle($request, function ($request) use ($next) {
+            /** @var \App\Models\Site|null $site */
+            $site = $request->session()->get('site');
 
-        if (Auth::check() && $site && ! $site->participants()->find($request->user()->id)) {
-            return redirect(route('index'));
-        }
+            if ($site && ! $site->participants()->find($request->user()->id)) {
+                return redirect(route('index'));
+            }
 
-        return $next($request);
+            return $next($request);
+        });
     }
 }
