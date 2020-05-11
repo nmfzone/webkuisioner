@@ -5,6 +5,7 @@ extensions:
   - php
 exclude:
   - bootstrap
+  - public
   - storage
   - tests
   - vendor

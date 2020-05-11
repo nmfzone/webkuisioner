@@ -3,7 +3,6 @@
     <description>Code Standard used for Laravel App</description>
 
     <file>./app</file>
-    <file>./config</file>
     <file>./routes</file>
 
     <exclude-pattern>./bootstrap/*</exclude-pattern>
