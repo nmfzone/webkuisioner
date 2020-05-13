@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div :class="['alert', localState, {'pr-12': dismissible}]" class="mb-5" v-if="localShow">
+    <div :class="['alert', localState, {'pr-12-imp': dismissible}]" v-if="localShow">
       <slot>
         <div class="header" v-if="hasMessage">{{ message }}</div>
         <ul class="list" v-if="hasMessages">
@@ -98,7 +98,7 @@
 
 <style lang="scss" scoped>
   .alert {
-    @apply border px-4 py-3 rounded relative;
+    @apply border px-4 py-3 mb-5 rounded relative;
 
     &.alert-success {
       @apply bg-green-200 border-green-300 text-teal-900;

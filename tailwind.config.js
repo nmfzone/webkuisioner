@@ -1,4 +1,5 @@
 const { colors } = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   theme: {
@@ -23,5 +24,22 @@ module.exports = {
         invalid: '0 0 0 0.2rem rgba(220,53,69,.25)'
       }
     }
-  }
+  },
+  variants: {
+    textColor: ['responsive', 'hover', 'focus', 'important'],
+    margin: ['responsive', 'important'],
+    padding: ['responsive', 'important'],
+  },
+  plugins: [
+    plugin(function({ addVariant }) {
+      addVariant('important', ({ container }) => {
+        container.walkRules(rule => {
+          rule.selector = `.${rule.selector.slice(1)}-imp`
+          rule.walkDecls(decl => {
+            decl.important = true
+          })
+        })
+      })
+    })
+  ],
 }
