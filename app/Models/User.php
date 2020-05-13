@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Garages\Database\Concerns\SerializeEmail;
+use App\Notifications\Auth\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,5 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = static::serializeEmail($value);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
