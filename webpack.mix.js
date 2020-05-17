@@ -17,6 +17,7 @@ require('laravel-mix-browser-sync-multi')
 
 mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
+  .sass('resources/sass/dashboard.scss', 'public/css')
   .tailwind('./tailwind.config.js')
   .purgeCss()
   .browserSyncMulti([

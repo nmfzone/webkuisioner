@@ -1,0 +1,15 @@
+.simple-card {
+  @apply bg-white rounded-md;
+
+  > .header {
+    @apply flex justify-between px-3 py-2 rounded-t-md font-normal;
+
+    font-size: 16px;
+    background: #F5F8FA;
+    color: #3C4551;
+  }
+
+  > .body {
+    @apply px-3 py-4;
+  }
+}

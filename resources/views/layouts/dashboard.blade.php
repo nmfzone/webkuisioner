@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('stylesheets')
-
+  <link href="{{ asset_url('css/dashboard.css') }}" rel="stylesheet">
 @endpush
 
 @section('content-lv2')
@@ -43,8 +43,8 @@
     </nav>
   </header>
 
-  <div class="px-4 sm:px-8 lg:px-16 xl:px-40 py-8 flex flex-wrap bg-gray-150 min-h-screen">
-    <main class="main">
+  <div class="px-4 sm:px-8 lg:px-16 xl:px-40 py-8 flex flex-wrap bg-gray-200 min-h-screen">
+    <main class="main w-full">
       @yield('content-lv3')
     </main>
   </div>
